@@ -1,0 +1,31 @@
+{
+  "name": "catalogue",
+  "version": "1.0.0",
+  "description": "Media Catalogue Service",
+  "main": "index.js",
+  "repository": "https://github.com/microtechcloud/mediacatalogue",
+  "author": "lee m. lwando",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "yarn run build && export NODE_ENV=development && nodemon dist/www/index.js",
+    "start": "yarn run build && export NODE_ENV=production && pm2 start dist/www/index.js --name=\"zedflix-catalogue-service\"",
+    "stop": "pm2 stop \"zedflix-catalogue-service\" ",
+    "status": "pm2 status \"zedflix-catalogue-service\" ",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+  },
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "http-errors": "^1.7.1",
+    "mongoose": "^5.4.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-watch": "^7.0.0",
+    "webpack": "^4.29.1"
+  }
+}
