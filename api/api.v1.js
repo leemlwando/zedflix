@@ -1,7 +1,13 @@
-import express from "express";
-import CreateErrors from "http-errors";
+// import express from "express";
+// import CreateErrors from "http-errors";
+
+// import  Fetch from "../lib/controllers/fetch";
+
+const express = require("express");
+const createErrors = require("http-errors");
+const Fetch  = require("../lib/controllers/fetch");
+const Create = require("../lib/controllers/create");
 const router  = express.Router();
-import  Fetch from "../lib/controllers/fetch";
 
 /**
  * @{fetch} id | ids
@@ -9,9 +15,13 @@ import  Fetch from "../lib/controllers/fetch";
  */
 
  router.get("/", (req,res,next)=>{
-   
-      Fetch.fetchOne(null,(media)=>res.json(media));
+     let {id} = req.query
+     Fetch.fetchOne({id},(err,media)=>res.json(err || media));
     
  })
 
-export default router;
+ router.post("/",(req,res,next)=>Create.createOne(null,(err,media)=>res.json(err || media)))
+
+// export default router;
+
+module.exports = router;
